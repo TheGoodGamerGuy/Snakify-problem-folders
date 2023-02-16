@@ -1,30 +1,37 @@
 let problems = document.querySelectorAll(".problem-available");
-let AllProblems = document.querySelector(".problems_link");
+let list = document.querySelector(".problems_link");
 
-var names = [];
-var links = [];
-var classes = [];
+// alert(String(problems[0].querySelector("a").innerHTML.trim()))
 
-var folder = document.createElement("ul");
+let names = [];
+let links = [];
+let classes = [];
+// let folders = [];
+
+let folder = document.createElement("ul");
 folder.className = "balls";
-AllProblems.appendChild(folder);
-
-
-for (let i = 0; i < problems.length-1; i++) {
-    names.push(problems[i].querySelector("a").innerHTML)
-    links.push(problems[i].querySelector("a").href)
-    classes.push(problems[i].className)
-}
-
-AddProblem(names, links, classes, folder)
-AddProblem(names, links, classes, folder)
+list.appendChild(folder);
 
 for (let i = 0; i < problems.length-1; i++) {
-        problems[i].remove();
+    let Problem_Name = problems[i].querySelector("a").innerHTML
+    let link = problems[i].querySelector("a").href
+    let Class_Name = problems[i].className
+
+    names.push(Problem_Name)
+    links.push(link)
+    classes.push(Class_Name)
 }
 
-function AddProblem(names, links, classnames, folder) {
-    for (let i = 0; i < problems.length-1; i++) {
+AddProblems(names, links, classes, folder)
+
+let original = list.querySelector("ul");
+original.remove();
+
+
+
+
+function AddProblems(names, links, classnames, folder) {
+    for (let i = 0; i < names.length; i++) {
         let problem = document.createElement("li");
         problem.className = classnames[i];
         folder.appendChild(problem);
@@ -33,5 +40,35 @@ function AddProblem(names, links, classnames, folder) {
         a.href = links[i];
         a.innerHTML = names[i];
         problem.appendChild(a);
+    }
+}
+
+
+
+AddAllFolders(problems, list)
+
+
+
+
+
+
+
+
+function AddAllFolders(problems, list) {
+    let folders = [];
+    for (let i = 0; i < problems.length-1; i++) {
+        try {
+            let topic = String(problems[i].querySelector("a").innerHTML.split("-")[1].trim())
+            if (!folders.includes(topic)) {
+                folders.push(topic)
+            }
+        } catch {
+            continue
+        }
+    }
+    for (let i = 0; i < folders.length; i++) {
+        let a = document.createElement("a");
+        a.className = folders[i];
+        list.appendChild(a);
     }
 }
