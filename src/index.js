@@ -36,6 +36,16 @@ for (let i = 0; i < folders.length; i++) {
     }
 }
 
+// hides all problems in folders on startup
+for (let i = 0; i < folders.length; i++) {
+    let problems = folders[i].querySelectorAll("li");
+    for (let i = 0; i < problems.length; i++) {
+        problems[i].style.display = "none";
+    }
+}
+
+
+
 
 
 function AddProblems(names, links, classnames, folder) {
@@ -79,8 +89,25 @@ function AddAllFolders(problems, list) {
         let a = document.createElement("a");
         a.className = folders[i];
         a.innerHTML = folders[i];
+        a.name = "hide";
+        a.onclick = function() { HideAndShowFolders(a) };
         list.appendChild(a);
         AllFolders.push(a);
     }
     return AllFolders;
+}
+
+function HideAndShowFolders(folder) {
+    let problems = folder.querySelectorAll("li");
+    if (folder.name == "show") {
+        folder.name = "hide";
+        for (let i = 0; i < problems.length; i++) {
+            problems[i].style.display = "none";
+        }
+    } else {
+        folder.name = "show";
+        for (let i = 0; i < problems.length; i++) {
+            problems[i].style.display = "block";
+        }
+    }
 }

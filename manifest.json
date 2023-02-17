@@ -12,7 +12,7 @@
       {
         "js": ["src/index.js"],
         "matches": [
-          "https://snakify.org/en/lessons/*"
+          "https://snakify.org/en/lessons/fb*"
         ]
       }
     ]
