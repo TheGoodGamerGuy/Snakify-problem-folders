@@ -2,18 +2,18 @@
     "manifest_version": 3,
     "name": "Snakify folders",
     "version": "1.0",
-    "description": "Add folders to created problems by their name",
-  
+    "description": "Adds interactable folders for created problems in Snakify",
+
     "permissions": [
-      "activeTab"
+        "activeTab"
     ],
-  
+
     "content_scripts": [
-      {
-        "js": ["src/index.js"],
-        "matches": [
-          "https://snakify.org/en/lessons/fb*"
-        ]
-      }
+        {
+            "js": ["src/AddFolders.js"],
+            "matches": [
+                "https://snakify.org/en/lessons/*-*-*-*-*"
+            ]
+        }
     ]
-  }
+}

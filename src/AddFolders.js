@@ -33,7 +33,7 @@ let original = list.querySelector("ul");
 original.remove();
 
 // add all folders
-let folders = AddAllFolders(problems, list)
+let folders = AddAllFolders(problems, list);
 
 // adds problems to each folder
 for (let i = 0; i < folders.length; i++) {
@@ -44,8 +44,11 @@ for (let i = 0; i < folders.length; i++) {
                 AddProblem(names[j], links[j], classes[j], folders[i])
             }
         } catch {
-            // iet vairākas reizes cauri i loopam WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
             AddProblem(names[j], links[j], classes[j], Unnamed)
+            names.splice(j,1)
+            links.splice(j,1)
+            classes.splice(j,1)
+            j--
         }
     }
 }
@@ -56,6 +59,10 @@ for (let i = 0; i < folders.length; i++) {
     for (let i = 0; i < problems.length; i++) {
         problems[i].style.display = "none";
     }
+}
+let UnnamedProblems = Unnamed.querySelectorAll("li");
+for (let i = 0; i < UnnamedProblems.length; i++) {
+    UnnamedProblems[i].style.display = "none";
 }
 
 
