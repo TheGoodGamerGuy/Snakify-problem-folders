@@ -11,7 +11,7 @@ Created problems should be named with a dash separating the name of the problem 
 ```
 Problem - Folder
 ```
-All problems that dont match the naming scheme will be put into the Unnamed folder.
+All problems that don't match the naming scheme will be put into the Unnamed folder.
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/909428087224160311/1076131974005149836/image.png)
 
