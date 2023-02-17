@@ -1,17 +1,14 @@
+// get all problems
 let problems = document.querySelectorAll(".problem-available");
+// get problem list
 let list = document.querySelector(".problems_link");
 
-// alert(String(problems[0].querySelector("a").innerHTML.trim()))
-
+// declare lists
 let names = [];
 let links = [];
 let classes = [];
-// let folders = [];
 
-let folder = document.createElement("ul");
-folder.className = "balls";
-list.appendChild(folder);
-
+// append all problems to each list
 for (let i = 0; i < problems.length-1; i++) {
     let Problem_Name = problems[i].querySelector("a").innerHTML
     let link = problems[i].querySelector("a").href
@@ -22,11 +19,22 @@ for (let i = 0; i < problems.length-1; i++) {
     classes.push(Class_Name)
 }
 
-AddProblems(names, links, classes, folder)
-
+// delete all problems
 let original = list.querySelector("ul");
 original.remove();
 
+// add all folders
+let folders = AddAllFolders(problems, list)
+
+// adds problems to each folder
+for (let i = 0; i < folders.length; i++) {
+    let topic = folders[i].className
+    for (let j = 0; j < names.length; j++) {
+        if (names[j].split("-")[1].trim() == topic) {
+            AddProblem(names[j], links[j], classes[j], folders[i])
+        }
+    }
+}
 
 
 
@@ -43,19 +51,20 @@ function AddProblems(names, links, classnames, folder) {
     }
 }
 
+function AddProblem(name, link, classname, folder) {
+    let problem = document.createElement("li");
+    problem.className = classname;
+    folder.appendChild(problem);
 
-
-AddAllFolders(problems, list)
-
-
-
-
-
-
-
+    let a = document.createElement("a");
+    a.href = link;
+    a.innerHTML = name;
+    problem.appendChild(a);
+}
 
 function AddAllFolders(problems, list) {
     let folders = [];
+    let AllFolders = [];
     for (let i = 0; i < problems.length-1; i++) {
         try {
             let topic = String(problems[i].querySelector("a").innerHTML.split("-")[1].trim())
@@ -69,6 +78,9 @@ function AddAllFolders(problems, list) {
     for (let i = 0; i < folders.length; i++) {
         let a = document.createElement("a");
         a.className = folders[i];
+        a.innerHTML = folders[i];
         list.appendChild(a);
+        AllFolders.push(a);
     }
+    return AllFolders;
 }
