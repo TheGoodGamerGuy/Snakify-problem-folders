@@ -3,6 +3,15 @@ let problems = document.querySelectorAll(".problem-available");
 // get problem list
 let list = document.querySelector(".problems_link");
 
+// Unnamed folder
+let Unnamed = document.createElement("a");
+Unnamed.className = "Unnamed problems";
+Unnamed.innerHTML = "Unnamed";
+Unnamed.name = "hide";
+Unnamed.onclick = function() { HideAndShowFolders(Unnamed) };
+list.appendChild(Unnamed);
+
+
 // declare lists
 let names = [];
 let links = [];
@@ -30,8 +39,13 @@ let folders = AddAllFolders(problems, list)
 for (let i = 0; i < folders.length; i++) {
     let topic = folders[i].className
     for (let j = 0; j < names.length; j++) {
-        if (names[j].split("-")[1].trim() == topic) {
-            AddProblem(names[j], links[j], classes[j], folders[i])
+        try {
+            if (names[j].split("-")[1].trim() == topic) {
+                AddProblem(names[j], links[j], classes[j], folders[i])
+            }
+        } catch {
+            // iet vairākas reizes cauri i loopam WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+            AddProblem(names[j], links[j], classes[j], Unnamed)
         }
     }
 }
