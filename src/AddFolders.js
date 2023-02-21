@@ -9,7 +9,9 @@ function main() {
     // Unnamed folder
     let Unnamed = document.createElement("a");
     Unnamed.className = "Unnamed";
-    Unnamed.innerHTML = "Unnamed";
+    let UnnamedDiv = document.createElement("div");
+    UnnamedDiv.innerHTML = "Unnamed";
+    Unnamed.appendChild(UnnamedDiv);
     Unnamed.name = "hide";
     Unnamed.onclick = function() { HideAndShowFolders(Unnamed) };
     list.appendChild(Unnamed);
@@ -59,15 +61,20 @@ function main() {
     // hides all problems in folders on startup
     for (let i = 0; i < folders.length; i++) {
         let problems = folders[i].querySelectorAll("li");
+        // Adds a count for the number of problems in the name of the folder
+        let aDiv = folders[i].querySelector("div");
+        aDiv.innerHTML = `${String(aDiv.innerHTML)} - ${String(problems.length)}`;
         for (let i = 0; i < problems.length; i++) {
             problems[i].style.display = "none";
         }
     }
     // hides all problems in the unnamed folder on startup
-    let UnnamedProblems = Unnamed.querySelectorAll("li");
-    for (let i = 0; i < UnnamedProblems.length; i++) {
-        UnnamedProblems[i].style.display = "none";
-    }
+        let UnnamedProblems = Unnamed.querySelectorAll("li");
+        // Adds a count for the number of problems in the name of the unnamed folder
+        UnnamedDiv.innerHTML = `${String(UnnamedDiv.innerHTML)} - ${String(UnnamedProblems.length)}`;
+        for (let i = 0; i < UnnamedProblems.length; i++) {
+            UnnamedProblems[i].style.display = "none";
+        }
     //hides the unnamed folder if its empty on startup
     if (UnnamedProblems.length == 0) {
         Unnamed.style.display = "none";
@@ -118,7 +125,9 @@ function AddAllFolders(problems, list) {
     for (let i = 0; i < folders.length; i++) {
         let a = document.createElement("a");
         a.className = folders[i];
-        a.innerHTML = folders[i];
+        let aDiv = document.createElement("div");
+        aDiv.innerHTML = folders[i];
+        a.appendChild(aDiv)
         a.name = "hide";
         a.onclick = function() { HideAndShowFolders(a) };
         list.appendChild(a);
