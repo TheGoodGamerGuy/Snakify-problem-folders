@@ -8,7 +8,7 @@ function main() {
 
     // Unnamed folder
     let Unnamed = document.createElement("a");
-    Unnamed.className = "Unnamed problems";
+    Unnamed.className = "Unnamed";
     Unnamed.innerHTML = "Unnamed";
     Unnamed.name = "hide";
     Unnamed.onclick = function() { HideAndShowFolders(Unnamed) };
@@ -63,10 +63,15 @@ function main() {
             problems[i].style.display = "none";
         }
     }
-    // hides the unnamed folder on startup
+    // hides all problems in the unnamed folder on startup
     let UnnamedProblems = Unnamed.querySelectorAll("li");
     for (let i = 0; i < UnnamedProblems.length; i++) {
         UnnamedProblems[i].style.display = "none";
+    }
+    //hides the unnamed folder if its empty on startup
+    if (UnnamedProblems.length == 0) {
+        Unnamed.style.display = "none";
+        Unnamed.name = "empty";
     }
 }
 
